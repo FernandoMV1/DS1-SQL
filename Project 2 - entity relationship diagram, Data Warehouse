@@ -1,0 +1,48 @@
+Code:
+
+CREATE TABLE Categoria_producto (
+	id_categoria INT NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	descripcion VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE Producto (
+	id_producto INT NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	descripcion VARCHAR(200) NOT NULL,
+	id_categoria INT NOT NULL,
+	FOREIGN KEY (codigo_categoria) REFERENCES Categoria_producto(id_categoria)
+	FOREIGN KEY (codigo_region) REFERENCES Region(id_region)
+);
+
+CREATE TABLE Region (
+	id_region INT NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	descripcion VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE Ciudad (
+	id_ciudad INT NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	codigo_region INT NOT NULL,
+	FOREIGN KEY (codigo_region) REFERENCES Region(id_region)
+);
+
+CREATE TABLE Fecha (
+	id_fecha INT NOT NULL PRIMARY KEY,
+	dia INT NOT NULL,
+	mes INT NOT NULL,
+	ano INT NOT NULL,
+	hora INT NOT NULL
+);
+
+CREATE TABLE Venta (
+	id_venta INT NOT NULL PRIMARY KEY,
+	codigo_producto INT NOT NULL,
+	cantidad INT NOT NULL,
+	precio_unitario FLOAT NOT NULL,
+	id_fecha INT NOT NULL,
+	FOREIGN KEY (codigo_producto) REFERENCES Producto(id_producto),
+	FOREIGN KEY (codigo_fecha) REFERENCES Fecha(id_fecha)
+	FOREIGN KEY (codigo_region) REFERENCES Region(id_region)
+);
